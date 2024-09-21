@@ -65,6 +65,7 @@ export abstract class Html {
 		let form = document.createElement("form");
 		form.className = class_;
 		children.forEach(child => form.appendChild(child));
+		form.onsubmit = _ => { return false; };
 
 		return form;
 	}
