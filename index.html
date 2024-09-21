@@ -1,13 +1,72 @@
 <!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + TS</title>
-  </head>
-  <body>
-    <div id="app"></div>
-    <script type="module" src="/src/main.ts"></script>
-  </body>
+<html lang="en" dir="rtl">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Cookbook</title>
+	<link rel="stylesheet" href="/src/style.css" />
+	<script type="module" src="/src/main.ts"></script>
+</head>
+
+<body>
+	<h1 class="page_title">ספר המתכונים של משפחת כהן</h1>
+
+	<form id="recipe_form">
+		<label for="recipe_name">שם מתכון:</label>
+		<input type="text" id="recipe_name" name="recipe_name" required placeholder="מאפינס" />
+
+		<ul class="recipe_sections">
+			<li>
+				<fieldset class="recipe_section">
+					<legend>שלב</legend>
+					<div>
+						<label for="section_name" class="section_name">שם שלב:</label>
+						<input type="text" name="section_name" required placeholder="הכנת הבצק" />
+					</div>
+					<fieldset>
+						<legend for="recipe_ingredients">רכיבים</legend>
+						<ul id="recipe_ingredients">
+							<li>
+								<input type="text" name="ingredient" required placeholder="קמח" />
+							</li>
+							<li>
+								<input type="text" name="ingredient" required placeholder="סוכר" />
+							</li>
+							<li>
+								<input type="text" name="ingredient" required placeholder="לימון" />
+							</li>
+							<li>
+								<button type="button" id="add_ingredient">הוסף רכיב</button>
+							</li>
+						</ul>
+					</fieldset>
+					<fieldset>
+						<legend for="recipe_instructions">הוראות הכנה</legend>
+						<ul id="recipe_instructions">
+							<li>
+								<input type="text" name="instruction" required placeholder="לערבב את הרכיבים היבשים" />
+							</li>
+							<li>
+								<input type="text" name="instruction" required placeholder="להוסיף את הנוזלים" />
+							</li>
+							<li>
+								<input type="text" name="instruction" required placeholder="ללוש עד שהבצק מתקבל" />
+							</li>
+							<li>
+								<button type="button" id="add_instruction">הוסף הוראה</button>
+							</li>
+						</ul>
+					</fieldset>
+				</fieldset>
+			</li>
+			<li>
+				<button type="button" id="add_section">הוסף שלב</button>
+			</li>
+		</ul>
+		<button type="submit">שמור מתכון</button>
+	</form>
+
+</body>
+
 </html>
