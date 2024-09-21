@@ -122,16 +122,18 @@ abstract class HtmlRecipeFormatter {
 		const nameLabel = Html.label("recipe_name", "recipe_name", "שם מתכון:");
 		const nameInput = Html.input("recipe_name", recipe.name);
 		const sections = HtmlRecipeFormatter.formatSectionList(recipe.sections);
-		const submit = Html.button("button", "save_recipe", "שמור מתכון");
+		const submit = Html.button("submit", "save_recipe", "שמור מתכון");
+		const form = Html.form("recipe_form", nameLabel, nameInput, sections, submit);
 
-		submit.onclick = () => {
+		form.onsubmit = () => {
+			console.log("submit");
 			const app = document.body.querySelector("#app")!;
 			const recipe = HtmlRecipeDecoder.decodeRecipe(app);
 			const mdRecipe = MdRecipeFormatter.formatRecipe(recipe);
 
 			var element = document.createElement('a');
 			element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(mdRecipe));
-			element.setAttribute('download', "recipe.md");
+			element.setAttribute('download', `${recipe.name}.md`);
 
 			element.style.display = 'none';
 			document.body.appendChild(element);
@@ -139,9 +141,10 @@ abstract class HtmlRecipeFormatter {
 			element.click();
 
 			document.body.removeChild(element);
+			return false;
 		};
 
-		return Html.form("recipe_form", nameLabel, nameInput, sections, submit);
+		return form
 	}
 }
 abstract class HtmlRecipeDecoder {
