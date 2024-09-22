@@ -118,7 +118,7 @@ textarea:not([rows]) {
 
 	--remove-button-margin-right: 0.3rem;
 	--remove-button-border-radius: 50%;
-	--remove-button-font-size: 1.2rem;
+	--remove-button-font-size: 0.8rem;
 
 	--add-button-font-size: 1.4rem;
 	--add-button-radius: 15%;

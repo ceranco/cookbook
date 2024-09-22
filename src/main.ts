@@ -38,7 +38,7 @@ abstract class MdRecipeFormatter {
 
 abstract class HtmlRecipeFormatter {
 	static formatIngredient(ingredient: Ingredient): HTMLLIElement {
-		const removeButton = Html.button("button", "remove_ingredient", "🚫");
+		const removeButton = Html.button("button", "remove_ingredient", "✖️");
 		const ingredientDiv = Html.div(Html.input("ingredient", ingredient), removeButton);
 		ingredientDiv.className = "ingredient";
 		const ingredientLi = Html.li(ingredientDiv);
@@ -65,7 +65,7 @@ abstract class HtmlRecipeFormatter {
 	}
 
 	static formatStep(step: Step): HTMLLIElement {
-		const removeButton = Html.button("button", "remove_step", "🚫");
+		const removeButton = Html.button("button", "remove_step", "✖️");
 		const stepDiv = Html.div(Html.input("step", step), removeButton);
 		stepDiv.className = "step";
 		const stepLi = Html.li(stepDiv);
@@ -92,7 +92,7 @@ abstract class HtmlRecipeFormatter {
 	}
 
 	static formatSection(section: Section): HTMLLIElement {
-		const removeButton = Html.button("button", "remove_section", "🚫");
+		const removeButton = Html.button("button", "remove_section", "✖️");
 		const name = Html.div(Html.label("section_name", "section_name", "שם שלב:"), Html.input("section_name", section.name), removeButton);
 		name.className = "section_name";
 		const ingredients = HtmlRecipeFormatter.formatIngredientList(section.ingredients);
