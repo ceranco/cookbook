@@ -35,13 +35,24 @@ export abstract class Html {
 		return label;
 	}
 
-	static input(name: string, value: string): HTMLInputElement {
-		let input = document.createElement("input");
-		input.type = "text";
+	static input(name: string, value: string): HTMLTextAreaElement {
+		let input = document.createElement("textarea");
 		input.name = name;
 		input.value = value;
 		input.required = true;
+		input.rows = 1;
 
+		setTimeout(() => {
+			const borderWidth = +getComputedStyle(input).getPropertyValue("border-width").slice(0, -2);
+			input.style.height = "auto";
+			input.style.height = input.scrollHeight + borderWidth * 2 + "px";
+
+			input.addEventListener("input", () => {
+				const borderWidth = +getComputedStyle(input).getPropertyValue("border-width").slice(0, -2);
+				input.style.height = "auto";
+				input.style.height = input.scrollHeight + borderWidth * 2 + "px";
+			});
+		});
 		return input;
 	}
 

@@ -149,17 +149,17 @@ abstract class HtmlRecipeFormatter {
 }
 abstract class HtmlRecipeDecoder {
 	static decodeIngredientList(element: Element): IngredientList {
-		const inputs = Array.from(element.querySelectorAll<HTMLInputElement>("input[name='ingredient']"));
+		const inputs = Array.from(element.querySelectorAll<HTMLTextAreaElement>("textarea[name='ingredient']"));
 		return inputs.map(input => input.value);
 	}
 
 	static decodeStepList(element: Element): StepList {
-		const inputs = Array.from(element.querySelectorAll<HTMLInputElement>("input[name='step']"));
+		const inputs = Array.from(element.querySelectorAll<HTMLTextAreaElement>("textarea[name='step']"));
 		return inputs.map(input => input.value);
 	}
 
 	static decodeSection(element: Element): Section {
-		const name = element.querySelector<HTMLInputElement>("input[name='section_name']")!.value;
+		const name = element.querySelector<HTMLTextAreaElement>("textarea[name='section_name']")!.value;
 		const ingredients = HtmlRecipeDecoder.decodeIngredientList(element.querySelector(".recipe_ingredients")!);
 		const steps = HtmlRecipeDecoder.decodeStepList(element.querySelector(".recipe_steps")!);
 
@@ -172,7 +172,7 @@ abstract class HtmlRecipeDecoder {
 	}
 
 	static decodeRecipe(element: Element): Recipe {
-		const name = element.querySelector<HTMLInputElement>("input[name='recipe_name']")!.value;
+		const name = element.querySelector<HTMLTextAreaElement>("textarea[name='recipe_name']")!.value;
 		const sections = HtmlRecipeDecoder.decodeSectionList(element.querySelector(".recipe_sections")!);
 
 		return new Recipe(name, sections);
