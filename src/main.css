@@ -130,7 +130,7 @@ textarea:not([rows]) {
 
 	--bullet-margin: 0.25rem;
 	--bullet-size-1: 1.35em;
-	--bullet-size-2: 0.5em;
+	--bullet-size-2: 1em;
 }
 
 body {
@@ -170,6 +170,7 @@ div.recipe_name>textarea {
 	flex-grow: 1;
 	max-width: 50%;
 	resize: none;
+	overflow: hidden;
 }
 
 div.section_name {
@@ -187,6 +188,7 @@ div.section_name>textarea {
 	flex-grow: 1;
 	max-width: 40%;
 	resize: none;
+	overflow: hidden;
 }
 
 div.ingredient,
@@ -195,6 +197,7 @@ div.step {
 	flex-grow: 1;
 	align-items: center;
 	text-wrap: nowrap;
+	padding: 0.25rem 0;
 }
 
 div.ingredient>textarea {
