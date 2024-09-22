@@ -127,6 +127,10 @@ textarea:not([rows]) {
 
 	--body-background-color: #f9f9f9;
 	--border-radius: 8px;
+
+	--bullet-margin: 0.25rem;
+	--bullet-size-1: 1.35em;
+	--bullet-size-2: 0.5em;
 }
 
 body {
@@ -188,6 +192,7 @@ div.section_name>textarea {
 div.ingredient,
 div.step {
 	display: flex;
+	flex-grow: 1;
 	align-items: center;
 	text-wrap: nowrap;
 }
@@ -229,14 +234,28 @@ button.remove_step:hover {
 	padding: 0;
 }
 
-ul.recipe_sections>li {
+ul.recipe_sections>li,
+ul.recipe_ingredients>li,
+ul.recipe_steps>li {
 	display: flex;
+}
+
+ul.recipe_ingredients>li,
+ul.recipe_steps>li {
+	align-items: center;
 }
 
 ul.recipe_sections>li::before {
 	content: "•";
-	font-size: 1.35em;
-	margin: 0.25rem;
+	font-size: var(--bullet-size-1);
+	margin: var(--bullet-margin);
+}
+
+ul.recipe_ingredients>li::before,
+ul.recipe_steps>li::before {
+	content: "○";
+	font-size: var(--bullet-size-2);
+	margin: var(--bullet-margin);
 }
 
 fieldset.section {
