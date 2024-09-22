@@ -1,0 +1,296 @@
+/* #region CSS Reset */
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+/* Prevent font size inflation */
+html {
+	-moz-text-size-adjust: none;
+	-webkit-text-size-adjust: none;
+	text-size-adjust: none;
+}
+
+/* Remove default margin in favour of better control in authored CSS */
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+figure,
+blockquote,
+dl,
+dd {
+	margin: 0;
+}
+
+/* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
+ul[role='list'],
+ol[role='list'] {
+	list-style: none;
+}
+
+/* Set core body defaults */
+body {
+	min-height: 100vh;
+	line-height: 1.5;
+}
+
+/* Set shorter line heights on headings and interactive elements */
+h1,
+h2,
+h3,
+h4,
+button,
+input,
+label {
+	line-height: 1.1;
+}
+
+/* Balance text wrapping on headings */
+h1,
+h2,
+h3,
+h4 {
+	text-wrap: balance;
+}
+
+/* A elements that don't have a class get default styles */
+a:not([class]) {
+	text-decoration-skip-ink: auto;
+	color: currentColor;
+}
+
+/* Make images easier to work with */
+img,
+picture {
+	max-width: 100%;
+	display: block;
+}
+
+/* Inherit fonts for inputs and buttons */
+input,
+button,
+textarea,
+select {
+	font-family: inherit;
+	font-size: inherit;
+}
+
+/* Make sure textareas without a rows attribute are not tiny */
+textarea:not([rows]) {
+	min-height: 10em;
+}
+
+/* Anything that has been anchored to should have extra scroll margin */
+:target {
+	scroll-margin-block: 5ex;
+}
+
+/* #endregion */
+
+:root {
+	font-family: Arial, sans-serif;
+	color: #333;
+
+	--title-color: #4a4a4a;
+	--title-size: 2rem;
+	--title-margin: 0.95rem;
+
+	--form-background-color: white;
+	--form-shadow: 0 0px 10px rgba(0, 0, 0, 0.2);
+	--form-padding: 1.5rem;
+	--form-max-width: 55rem;
+	--form-margin-bottom: 2em;
+
+	--section-border: 1px solid #ddd;
+	--section-margin: 0rem 0.2rem 1.5rem;
+
+	--sub-section-border: 1px solid #afacac;
+	--sub-section-margin: 0.45rem;
+
+	--name-font-size: 1.2em;
+
+	--label-margin-left: 0.75rem;
+
+	--remove-button-margin-right: 0.3rem;
+	--remove-button-border-radius: 50%;
+	--remove-button-font-size: 1.2rem;
+
+	--add-button-font-size: 1.4rem;
+	--add-button-radius: 15%;
+
+	--section-button-padding: 0.3rem;
+
+	--body-background-color: #f9f9f9;
+	--border-radius: 8px;
+}
+
+body {
+	background-color: var(--body-background-color);
+}
+
+.page_title {
+	text-align: center;
+	margin: var(--title-margin);
+	font-size: var(--title-size);
+	color: var(--title-color);
+}
+
+.recipe_form {
+	background-color: var(--form-background-color);
+	border-radius: var(--border-radius);
+	box-shadow: var(--form-shadow);
+	padding: var(--form-padding);
+	max-width: var(--form-max-width);
+	margin: auto;
+	margin-bottom: var(--form-margin-bottom);
+}
+
+div.recipe_name {
+	display: flex;
+	align-items: center;
+	text-wrap: nowrap;
+	font-size: var(--name-font-size);
+}
+
+div.recipe_name>label {
+	font-weight: bold;
+	margin-left: var(--label-margin-left);
+}
+
+div.recipe_name>textarea {
+	flex-grow: 1;
+	max-width: 50%;
+	resize: none;
+}
+
+div.section_name {
+	display: flex;
+	align-items: center;
+	text-wrap: nowrap;
+	font-size: var(--name-font-size);
+}
+
+div.section_name>label {
+	margin-left: var(--label-margin-left);
+}
+
+div.section_name>textarea {
+	flex-grow: 1;
+	max-width: 40%;
+	resize: none;
+}
+
+div.ingredient,
+div.step {
+	display: flex;
+	align-items: center;
+	text-wrap: nowrap;
+}
+
+div.ingredient>textarea {
+	flex-grow: 1;
+	max-width: 40%;
+	resize: none;
+}
+
+div.step>textarea {
+	flex-grow: 1;
+	resize: none;
+}
+
+button {
+	transition: background-color 0.3s;
+}
+
+button.remove_section,
+button.remove_ingredient,
+button.remove_step {
+	background: none;
+	border: none;
+	font-size: var(--remove-button-font-size);
+	margin-right: var(--remove-button-margin-right);
+	padding: var(--section-button-padding);
+	border-radius: var(--remove-button-border-radius);
+	cursor: pointer;
+}
+
+button.remove_section:hover,
+button.remove_ingredient:hover,
+button.remove_step:hover {
+	background-color: #ded9d9;
+}
+
+.recipe_sections {
+	padding: 0;
+}
+
+ul.recipe_sections>li {
+	display: flex;
+}
+
+ul.recipe_sections>li::before {
+	content: "•";
+	font-size: 1.35em;
+	margin: 0.25rem;
+}
+
+fieldset.section {
+	border: var(--section-border);
+	border-radius: var(--border-radius);
+	margin: var(--section-margin);
+	flex-grow: 1;
+}
+
+fieldset.section>legend {
+	font-weight: bold;
+	font-size: 1.2rem;
+}
+
+fieldset.ingredients,
+fieldset.steps {
+	border: var(--sub-section-border);
+	border-radius: var(--border-radius);
+	margin: var(--sub-section-margin);
+}
+
+fieldset.ingredients>legend,
+fieldset.steps>legend {
+	font-weight: bold;
+	font-size: 1rem;
+}
+
+button.add_ingredient,
+button.add_step,
+button.add_section {
+	background: none;
+	border: none;
+	padding: var(--section-button-padding);
+	font-size: var(--add-button-font-size);
+	border-radius: var(--add-button-radius);
+}
+
+button.add_ingredient:hover,
+button.add_step:hover,
+button.add_section:hover {
+	background-color: #ded9d9;
+}
+
+button.save_recipe {
+	display: block;
+	font-size: 1.3rem;
+	margin: auto;
+	background-color: #ebebeb;
+	padding: 0.5rem;
+	border: none;
+	border-radius: var(--border-radius);
+	cursor: pointer;
+}
+
+button.save_recipe:hover {
+	background-color: #c8c8c8;
+}

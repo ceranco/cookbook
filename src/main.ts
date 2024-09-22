@@ -38,8 +38,9 @@ abstract class MdRecipeFormatter {
 
 abstract class HtmlRecipeFormatter {
 	static formatIngredient(ingredient: Ingredient): HTMLLIElement {
-		const removeButton = Html.button("button", "remove_ingredient", "X");
+		const removeButton = Html.button("button", "remove_ingredient", "🚫");
 		const ingredientDiv = Html.div(Html.input("ingredient", ingredient), removeButton);
+		ingredientDiv.className = "ingredient";
 		const ingredientLi = Html.li(ingredientDiv);
 
 		removeButton.onclick = () => {
@@ -50,7 +51,7 @@ abstract class HtmlRecipeFormatter {
 	}
 
 	static formatIngredientList(ingredients: IngredientList): HTMLElement {
-		const button = Html.button("button", "add_ingredient", "הוסף רכיב");
+		const button = Html.button("button", "add_ingredient", "⬅️");
 
 		const list = ingredients.map(HtmlRecipeFormatter.formatIngredient);
 		list.push(Html.li(button));
@@ -64,8 +65,9 @@ abstract class HtmlRecipeFormatter {
 	}
 
 	static formatStep(step: Step): HTMLLIElement {
-		const removeButton = Html.button("button", "remove_step", "X");
+		const removeButton = Html.button("button", "remove_step", "🚫");
 		const stepDiv = Html.div(Html.input("step", step), removeButton);
+		stepDiv.className = "step";
 		const stepLi = Html.li(stepDiv);
 
 		removeButton.onclick = () => {
@@ -76,7 +78,7 @@ abstract class HtmlRecipeFormatter {
 	}
 
 	static formatStepList(steps: StepList): HTMLElement {
-		const button = Html.button("button", "add_step", "הוסף שלב");
+		const button = Html.button("button", "add_step", "⬅️");
 
 		const list = steps.map(HtmlRecipeFormatter.formatStep);
 		list.push(Html.li(button));
@@ -90,8 +92,9 @@ abstract class HtmlRecipeFormatter {
 	}
 
 	static formatSection(section: Section): HTMLLIElement {
-		const removeButton = Html.button("button", "remove_section", "X");
+		const removeButton = Html.button("button", "remove_section", "🚫");
 		const name = Html.div(Html.label("section_name", "section_name", "שם שלב:"), Html.input("section_name", section.name), removeButton);
+		name.className = "section_name";
 		const ingredients = HtmlRecipeFormatter.formatIngredientList(section.ingredients);
 		const steps = HtmlRecipeFormatter.formatStepList(section.steps);
 		const sectionLi = Html.li(Html.fieldset("section", "שלב", name, ingredients, steps));
@@ -104,7 +107,7 @@ abstract class HtmlRecipeFormatter {
 	}
 
 	static formatSectionList(sections: SectionList): HTMLElement {
-		const button = Html.button("button", "add_section", "הוסף שלב");
+		const button = Html.button("button", "add_section", "⬅️");
 
 		const list = sections.map(HtmlRecipeFormatter.formatSection);
 		list.push(Html.li(button));
@@ -121,9 +124,11 @@ abstract class HtmlRecipeFormatter {
 	static formatRecipe(recipe: Recipe): HTMLElement {
 		const nameLabel = Html.label("recipe_name", "recipe_name", "שם מתכון:");
 		const nameInput = Html.input("recipe_name", recipe.name);
+		const nameDiv = Html.div(nameLabel, nameInput);
+		nameDiv.className = "recipe_name";
 		const sections = HtmlRecipeFormatter.formatSectionList(recipe.sections);
-		const submit = Html.button("submit", "save_recipe", "שמור מתכון");
-		const form = Html.form("recipe_form", nameLabel, nameInput, sections, submit);
+		const submit = Html.button("submit", "save_recipe", "📥 שמור מתכון 📥");
+		const form = Html.form("recipe_form", nameDiv, sections, submit);
 
 		form.onsubmit = () => {
 			console.log("submit");
@@ -190,7 +195,6 @@ const recipe = storedRecipe ? JSON.parse(storedRecipe) :
 const html = HtmlRecipeFormatter.formatRecipe(recipe);
 const app = document.body.querySelector("#app")!;
 app.replaceChildren(html);
-console.log(HtmlRecipeDecoder.decodeRecipe(app));
 
 setInterval(() => {
 	sessionStorage.setItem("recipe", JSON.stringify(HtmlRecipeDecoder.decodeRecipe(app)));
