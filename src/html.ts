@@ -42,16 +42,28 @@ export abstract class Html {
 		input.required = true;
 		input.rows = 1;
 
-		setTimeout(() => {
-			const borderWidth = +getComputedStyle(input).getPropertyValue("border-width").slice(0, -2);
-			input.style.height = "auto";
-			input.style.height = input.scrollHeight + borderWidth * 2 + "px";
+		const updateHeight = (ta: HTMLTextAreaElement) => {
+			const borderWidth = +getComputedStyle(ta).getPropertyValue("border-width").slice(0, -2);
+			ta.style.height = "auto";
+			ta.style.height = ta.scrollHeight + borderWidth * 2 + "px";
+		}
 
-			input.addEventListener("input", () => {
-				const borderWidth = +getComputedStyle(input).getPropertyValue("border-width").slice(0, -2);
-				input.style.height = "auto";
-				input.style.height = input.scrollHeight + borderWidth * 2 + "px";
+		setTimeout(() => {
+			updateHeight(input);
+
+			input.addEventListener("input", () => updateHeight(input));
+			const resizeObserver = new ResizeObserver((entries) => {
+				console.assert(entries.length === 1);
+				const input = entries[0];
+
+				if (input) {
+					updateHeight(input.target as HTMLTextAreaElement);
+				} else {
+					resizeObserver.disconnect();
+				}
+
 			});
+			resizeObserver.observe(input);
 		});
 		return input;
 	}
