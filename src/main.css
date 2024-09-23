@@ -27,8 +27,9 @@ dd {
 	margin: 0;
 }
 
-/* Allow fieldset and divs to be small for mobile */
+/* Allow for mobile */
 fieldset,
+textarea,
 div {
 	min-width: 0;
 }
@@ -37,6 +38,11 @@ div {
 ul[role='list'],
 ol[role='list'] {
 	list-style: none;
+}
+
+ul,
+ol {
+	padding: 0;
 }
 
 /* Set core body defaults */
@@ -141,6 +147,7 @@ textarea:not([rows]) {
 
 body {
 	background-color: var(--body-background-color);
+	min-width: 250px;
 }
 
 .page_title {
@@ -210,11 +217,13 @@ div.ingredient>textarea {
 	flex-grow: 1;
 	max-width: 40%;
 	resize: none;
+	overflow: hidden;
 }
 
 div.step>textarea {
 	flex-grow: 1;
 	resize: none;
+	overflow: hidden;
 }
 
 button {
